@@ -195,8 +195,10 @@
       async function fetchOpportunities() {
         try {
           const response = await fetch(API_URL);
+          console.log(response);
 
           const opportunities = await response.json();
+          console.log(opportunities);
 
           displayOpportunities(opportunities.data || opportunities);
         } catch (error) {
