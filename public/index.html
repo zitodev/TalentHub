@@ -199,17 +199,6 @@
       #about {
         text-align: center;
       }
-      .opportunity-image {
-        width: 100%;
-
-        height: 180px;
-
-        object-fit: cover;
-
-        border-radius: 15px;
-
-        margin-bottom: 20px;
-      }
 
       .info {
         background: #f8fafc;
@@ -225,17 +214,6 @@
         font-size: 14px;
 
         color: #475569;
-      }
-      .opportunity-image {
-        width: 100%;
-
-        height: 180px;
-
-        object-fit: cover;
-
-        border-radius: 15px;
-
-        margin-bottom: 20px;
       }
 
       .info {
@@ -291,7 +269,7 @@
       <nav>
         <a href="#home"> Home </a>
 
-        <a href="#opportunities"> Opportunities </a>
+        <a href="homeOpportuintyList.html"> Opportunities </a>
 
         <a href="employer.html">Submit Employer request </a>
 
@@ -336,18 +314,6 @@
 
           <p>Students</p>
         </div>
-      </div>
-    </section>
-
-    <section id="opportunities">
-      <h2>Latest Opportunities</h2>
-
-      <p class="subtitle">
-        Explore career opportunities from trusted organizations.
-      </p>
-
-      <div id="opportunityContainer" class="cards">
-        <!-- Opportunities load here -->
       </div>
     </section>
 
@@ -403,161 +369,6 @@
 
       <p>© 2026 TalentHub. All rights reserved.</p>
     </footer>
-
-    <script>
-      const API_URL =
-        "http://localhost:5000/api/opportunities/get-all-opportunities";
-
-      const container = document.getElementById("opportunityContainer");
-
-      async function fetchOpportunities() {
-        try {
-          const response = await fetch(API_URL);
-
-          const opportunities = await response.json();
-
-          displayOpportunities(opportunities.data || opportunities);
-        } catch (error) {
-          container.innerHTML = `
-
-<p>
-Unable to load opportunities.
-</p>
-
-`;
-
-          console.log(error);
-        }
-      }
-
-      function displayOpportunities(data) {
-        container.innerHTML = "";
-
-        if (data.length === 0) {
-          container.innerHTML = `
-
-<p>
-No opportunities available
-</p>
-
-`;
-
-          return;
-        }
-
-        data.forEach((item) => {
-          container.innerHTML += `
-
-
-<div class="card">
-
-
-
-${
-  item.image
-    ? `
-<img 
-src="http://localhost:5000${item.image}"
-class="opportunity-image">
-`
-    : ""
-}
-
-
-
-
-<h3>
-
-${item.title}
-
-</h3>
-
-
-
-
-<span>
-
-${item.category}
-
-</span>
-
-
-
-
-<p>
-
-${item.description.substring(0, 120)}
-
-...
-
-</p>
-
-
-
-
-<div class="info">
-
-
-<p>
-📌 ${item.location}
-</p>
-
-
-<p>
-⏳ ${item.duration}
-</p>
-
-
-<p>
-📅 ${new Date(item.startDate).toDateString()}
-</p>
-
-<p>
-🖥️ ${item.responsibilities}
-</p>
-
-<p>
-📚 ${item.requirements}
-</p>
-
-<p>
-🎖️ ${item.benefits}
-</p>
-
-
-<p>
-💼 ${item.opportunityType}
-</p>
-
-
-</div>
-
-
-
-
-<button
-onclick="apply('${item._id}')">
-
-Apply Now
-
-</button>
-
-
-
-</div>
-
-
-
-`;
-        });
-      }
-
-      function apply(id) {
-        window.location.href = `application.html?id=${id}`;
-      }
-
-      fetchOpportunities();
-    </script>
 
     <script src="script.js"></script>
   </body>

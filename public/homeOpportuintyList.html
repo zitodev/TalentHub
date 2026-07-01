@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+
+        color: #0f172a;
+
+        background: #f8fafc;
+      }
+
+      header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 20px 8%;
+
+        background: white;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 5;
+
+        box-shadow: 0 5px 20px #ddd;
+      }
+
+      .logo {
+        font-size: 28px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+      }
+
+      nav a {
+        margin: 15px;
+
+        text-decoration: none;
+
+        color: #334155;
+      }
+
+      button {
+        background: #2563eb;
+
+        color: white;
+
+        border: none;
+
+        padding: 14px 28px;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+      }
+
+      section {
+        padding: 70px 8%;
+      }
+
+      h2 {
+        font-size: 38px;
+      }
+
+      .subtitle {
+        color: #64748b;
+      }
+
+      .cards {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+        gap: 25px;
+      }
+
+      .card {
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 10px 30px #ddd;
+      }
+
+      .card span {
+        background: #dbeafe;
+
+        padding: 8px;
+
+        border-radius: 20px;
+
+        color: #2563eb;
+      }
+
+      .opportunity-image {
+        width: 100%;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        border-radius: 15px;
+
+        margin-bottom: 20px;
+      }
+
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+      .opportunity-image {
+        width: 100%;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        border-radius: 15px;
+
+        margin-bottom: 20px;
+      }
+
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+
+      @media (max-width: 800px) {
+        nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section id="opportunities">
+      <h2>Latest Opportunities</h2>
+
+      <p class="subtitle">
+        Explore career opportunities from trusted organizations.
+      </p>
+
+      <div id="opportunityContainer" class="cards">
+        <!-- Opportunities load here -->
+      </div>
+    </section>
+
+    <script>
+      const API_URL =
+        "http://localhost:5000/api/opportunities/get-all-opportunities";
+
+      const container = document.getElementById("opportunityContainer");
+
+      async function fetchOpportunities() {
+        try {
+          const response = await fetch(API_URL);
+
+          const opportunities = await response.json();
+
+          displayOpportunities(opportunities.data || opportunities);
+        } catch (error) {
+          container.innerHTML = `
+
+<p>
+Unable to load opportunities.
+</p>
+
+`;
+
+          console.log(error);
+        }
+      }
+
+      function displayOpportunities(data) {
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+          container.innerHTML = `
+
+<p>
+No opportunities available
+</p>
+
+`;
+
+          return;
+        }
+
+        data.forEach((item) => {
+          container.innerHTML += `
+
+
+<div class="card">
+
+
+
+${
+  item.image
+    ? `
+<img 
+src="http://localhost:5000${item.image}"
+class="opportunity-image">
+`
+    : ""
+}
+
+
+
+
+<h3>
+
+${item.title}
+
+</h3>
+
+
+
+
+<span>
+
+${item.category}
+
+</span>
+
+
+
+
+<p>
+
+${item.description.substring(0, 120)}
+
+...
+
+</p>
+
+
+
+
+<div class="info">
+
+
+<p>
+📌 ${item.location}
+</p>
+
+
+<p>
+⏳ ${item.duration}
+</p>
+
+
+<p>
+📅 ${new Date(item.startDate).toDateString()}
+</p>
+
+<p>
+🖥️ ${item.responsibilities}
+</p>
+
+<p>
+📚 ${item.requirements}
+</p>
+
+<p>
+🎖️ ${item.benefits}
+</p>
+
+
+<p>
+💼 ${item.opportunityType}
+</p>
+
+
+</div>
+
+
+
+
+<button
+onclick="apply('${item._id}')">
+
+Apply Now
+
+</button>
+
+
+
+</div>
+
+
+
+`;
+        });
+      }
+
+      function apply(id) {
+        window.location.href = `application.html?id=${id}`;
+      }
+
+      fetchOpportunities();
+    </script>
+  </body>
+</html>
