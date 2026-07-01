@@ -3,7 +3,7 @@ const loginBtn = document.getElementById("loginBtn");
 async function checkUser() {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/auth/check",
+      "https://talenthub-v85u.onrender.com/api/auth/check",
 
       {
         credentials: "include",
@@ -28,7 +28,7 @@ async function checkUser() {
 
 async function logout() {
   await fetch(
-    "http://localhost:5000/api/auth/logout",
+    "https://talenthub-v85u.onrender.com/api/auth/logout",
 
     {
       method: "POST",
