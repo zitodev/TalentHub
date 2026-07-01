@@ -214,8 +214,9 @@
     <script>
       async function loadDashboard() {
         try {
+          const API = "https://talenthub-v85u.onrender.com/api";
           const response = await fetch(
-            "http://localhost:5000/api/auth/dashboard",
+            `{API}/auth/dashboard`,
 
             {
               credentials: "include",

@@ -237,8 +237,9 @@
           formData.append("cv", cv.files[0]);
 
           try {
+            const API = "https://talenthub-v85u.onrender.com/api";
             const response = await fetch(
-              `http://localhost:5000/api/applications/submit-applications/${oppId}`,
+              `{API}/applications/submit-applications/${oppId}`,
               {
                 method: "POST",
 

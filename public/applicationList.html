@@ -16,10 +16,11 @@
       </div>
     </section>
     <script>
+      const API = "https://talenthub-v85u.onrender.com/api";
       async function fetchApplication() {
         try {
           const response = await fetch(
-            "http://localhost:5000/api/applications/application-list",
+            `{API}/applications/application-lisT`,
 
             {
               credentials: "include",

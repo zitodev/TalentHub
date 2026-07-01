@@ -202,8 +202,8 @@
     </section>
 
     <script>
-      const API_URL =
-        "http://localhost:5000/api/opportunities/get-all-opportunities";
+      const API = "https://talenthub-v85u.onrender.com/api";
+      const API_URL = `{API}/opportunities/get-all-opportunities`;
 
       const container = document.getElementById("opportunityContainer");
 
@@ -254,7 +254,7 @@ ${
   item.image
     ? `
 <img 
-src="http://localhost:5000${item.image}"
+src="${item.image}"
 class="opportunity-image">
 `
     : ""

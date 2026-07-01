@@ -206,6 +206,7 @@
         const password = document.getElementById("pwd").value;
 
         try {
+          const API = "https://talenthub-v85u.onrender.com/api";
           const response = await fetch(`{API}/auth/login`, {
             method: "POST",
             headers: {
