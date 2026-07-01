@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Dashboard</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: #f5f7fb;
+        color: #333;
+      }
+
+      /* SIDEBAR */
+
+      .sidebar {
+        position: fixed;
+        width: 260px;
+        height: 100vh;
+        background: #111827;
+        color: white;
+        padding: 25px;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 40px;
+      }
+
+      .sidebar a {
+        display: block;
+        color: #cbd5e1;
+        text-decoration: none;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      .sidebar a:hover {
+        background: #2563eb;
+        color: white;
+      }
+
+      /* MAIN */
+
+      .main {
+        margin-left: 260px;
+        padding: 30px;
+      }
+
+      /* HEADER */
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 30px;
+      }
+
+      .profile {
+        background: white;
+        padding: 12px 20px;
+        border-radius: 20px;
+      }
+
+      /* CARDS */
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .card h3 {
+        color: #64748b;
+        font-size: 16px;
+      }
+
+      .number {
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+
+      .blue {
+        color: #2563eb;
+      }
+
+      .green {
+        color: #16a34a;
+      }
+
+      .orange {
+        color: #ea580c;
+      }
+
+      /* TABLE */
+
+      .table-box {
+        margin-top: 40px;
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo">SkillHub Admin</div>
+
+      <a href="#">Dashboard</a>
+
+      <a href="opportunity.html">Add Opportunities</a>
+
+      <a href="applicationList.html">Applications</a>
+
+      <a href="employer.html">Add Employers</a>
+
+      <a href="opportunityList.html">View Opportunities</a>
+
+      <a href="employerList.html">View Employers</a>
+
+      <a href="#">Users</a>
+      <a href="#">Settings</a>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <h1>Admin Dashboard</h1>
+
+        <div class="profile">Admin</div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Total Opportunities</h3>
+
+          <div class="number blue" id="opportunities">0</div>
+        </div>
+
+        <div class="card">
+          <h3>Total Applications</h3>
+
+          <div class="number green" id="applications">0</div>
+        </div>
+
+        <div class="card">
+          <h3>Employers</h3>
+
+          <div class="number orange" id="employers">0</div>
+        </div>
+      </div>
+
+      <div class="table-box">
+        <h2>Recent Activity</h2>
+
+        <br />
+
+        <table>
+          <tr>
+            <th>Activity</th>
+
+            <th>Status</th>
+          </tr>
+
+          <tr>
+            <td>New opportunity posted</td>
+
+            <td>Completed</td>
+          </tr>
+
+          <tr>
+            <td>Employer registered</td>
+
+            <td>Completed</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      async function loadDashboard() {
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/auth/dashboard",
+
+            {
+              credentials: "include",
+            },
+          );
+
+          const data = await response.json();
+
+          document.getElementById("opportunities").innerHTML =
+            data.opportunities;
+
+          document.getElementById("applications").innerHTML = data.applications;
+
+          document.getElementById("employers").innerHTML = data.employers;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      loadDashboard();
+    </script>
+  </body>
+</html>

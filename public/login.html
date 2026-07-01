@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Login</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+
+        height: 100vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        background: linear-gradient(135deg, #2563eb, #0f172a);
+      }
+
+      .login-container {
+        width: 90%;
+
+        max-width: 420px;
+
+        background: white;
+
+        padding: 40px;
+
+        border-radius: 25px;
+
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      .logo {
+        text-align: center;
+
+        font-size: 25px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+
+        margin-bottom: 25px;
+      }
+
+      h1 {
+        text-align: center;
+
+        color: #0f172a;
+      }
+
+      p {
+        text-align: center;
+
+        color: #64748b;
+      }
+
+      form {
+        margin-top: 30px;
+      }
+
+      .input-box {
+        position: relative;
+
+        margin-bottom: 25px;
+      }
+
+      input,
+      select {
+        width: 100%;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        border: 1px solid #cbd5e1;
+
+        outline: none;
+
+        font-size: 15px;
+      }
+
+      .input-box label {
+        position: absolute;
+
+        left: 15px;
+
+        top: 15px;
+
+        color: #64748b;
+
+        background: white;
+
+        padding: 0 5px;
+
+        pointer-events: none;
+
+        transition: 0.3s;
+      }
+
+      input:focus + label,
+      input:valid + label {
+        top: -10px;
+
+        font-size: 12px;
+
+        color: #2563eb;
+      }
+
+      #toggle {
+        position: absolute;
+
+        right: 15px;
+
+        top: 15px;
+
+        cursor: pointer;
+      }
+
+      .role-box {
+        margin-bottom: 25px;
+      }
+
+      button {
+        width: 100%;
+
+        padding: 15px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        background: #2563eb;
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      #message {
+        margin-top: 20px;
+
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="logo">TalentHub Admin</div>
+
+      <h1>Welcome Back</h1>
+
+      <p>Login to manage opportunities and applications</p>
+
+      <form id="loginForm">
+        <div class="input-box">
+          <input type="email" id="email" required />
+
+          <label> Email Address </label>
+        </div>
+
+        <div class="input-box">
+          <input type="password" id="pwd" required />
+
+          <label> Password </label>
+
+          <span id="toggle"> 👁 </span>
+        </div>
+
+        <button type="submit">Login</button>
+
+        <p id="message"></p>
+      </form>
+    </div>
+
+    <script>
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault(); // 🔥 STOP PAGE RELOAD
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("pwd").value;
+
+        try {
+          const response = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            alert(data.message || "Login failed");
+            return;
+          }
+
+          const user = data.user;
+          console.log(user);
+
+          if (user.role === "admin") {
+            window.location.href = "adminDashboard.html";
+          } else {
+            window.location.href = "/index.html";
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Server error / Network error");
+        }
+      });
+    </script>
+  </body>
+</html>

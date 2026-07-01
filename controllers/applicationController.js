@@ -1,0 +1,30 @@
+const Application = require("../models/Application");
+const transporter = require("../utils/email");
+
+exports.submitApplication = async (req, res) => {
+  const oppId = req.params.id;
+  const app = await Application.create({
+    ...req.body,
+    opportunity: oppId,
+    cv: req.file ? `/uploads/${req.file.filename}` : undefined,
+  });
+
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: req.body.email,
+    subject: "Application Received",
+    text: `Dear ${req.body.fullName},\n\nThank you for applying for the opportunity. We have received your application and will review it shortly.\n\nBest regards,\nThe Team`,
+  });
+
+  res.status(201).json({
+    message: "Application submitted",
+
+    app,
+  });
+};
+
+exports.listApplications = async (req, res) => {
+  const apps = await Application.find().populate("opportunity");
+
+  res.json(apps);
+};

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Employer Portal</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+
+        min-height: 100vh;
+
+        background: linear-gradient(135deg, #2563eb, #0f172a);
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+      }
+
+      .container {
+        width: 90%;
+
+        max-width: 900px;
+
+        background: white;
+
+        padding: 40px;
+
+        border-radius: 25px;
+
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .header {
+        text-align: center;
+
+        margin-bottom: 35px;
+      }
+
+      .header h1 {
+        font-size: 35px;
+
+        color: #1e293b;
+      }
+
+      .header p {
+        color: #64748b;
+      }
+
+      .grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
+      }
+
+      .input-box {
+        position: relative;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        border: 1px solid #cbd5e1;
+
+        font-size: 15px;
+
+        outline: none;
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      label {
+        position: absolute;
+
+        left: 15px;
+
+        top: 15px;
+
+        color: #64748b;
+
+        pointer-events: none;
+
+        transition: 0.3s;
+
+        background: white;
+
+        padding: 0 5px;
+      }
+
+      input:focus + label,
+      input:valid + label,
+      textarea:focus + label,
+      textarea:valid + label {
+        top: -10px;
+
+        font-size: 12px;
+
+        color: #2563eb;
+      }
+
+      button {
+        margin-top: 30px;
+
+        width: 100%;
+
+        padding: 16px;
+
+        border: none;
+
+        background: #2563eb;
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      #response {
+        text-align: center;
+
+        margin-top: 20px;
+
+        font-weight: bold;
+      }
+
+      @media (max-width: 700px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .container {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Partner With TalentHub</h1>
+
+        <p>
+          Hire global talents, create internships, and build custom training
+          programs.
+        </p>
+      </div>
+
+      <form id="employerForm">
+        <div class="grid">
+          <div class="input-box">
+            <input type="text" id="companyName" required />
+
+            <label> Company Name </label>
+          </div>
+
+          <div class="input-box">
+            <input type="text" id="contactPerson" required />
+
+            <label> Contact Person </label>
+          </div>
+
+          <div class="input-box">
+            <input type="email" id="email" required />
+
+            <label> Email Address </label>
+          </div>
+
+          <div class="input-box">
+            <input type="tel" id="phone" />
+
+            <label> Phone Number </label>
+          </div>
+
+          <div class="input-box">
+            <input type="text" id="country" />
+
+            <label> Country </label>
+          </div>
+
+          <div class="input-box">
+            <select id="requestType">
+              <option value="">Select Request Type</option>
+
+              <option>Hiring International Talent</option>
+
+              <option>Internship Program</option>
+
+              <option>Corporate Training</option>
+
+              <option>AI Workshop</option>
+
+              <option>Custom Training Program</option>
+            </select>
+          </div>
+
+          <div class="input-box">
+            <input type="number" id="numberOfCandidates" min="1" />
+
+            <label> Number of Candidates </label>
+          </div>
+        </div>
+        <br />
+
+        <div class="message">
+          <textarea
+            id="message"
+            rows="5"
+            placeholder=" Tell us about your request"
+          ></textarea>
+        </div>
+        <br />
+
+        <button type="submit">Submit Partnership Request</button>
+
+        <p id="response"></p>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("employerForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = {
+          companyName: companyName.value,
+
+          contactPerson: contactPerson.value,
+
+          email: email.value,
+
+          phone: phone.value,
+
+          country: country.value,
+
+          requestType: requestType.value,
+
+          numberOfCandidates: Number(numberOfCandidates.value),
+
+          message: message.value,
+        };
+
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/employers/submit-request",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify(data),
+            },
+          );
+
+          const result = await response.json();
+
+          document.getElementById("response").innerHTML =
+            "✅ Request submitted successfully";
+
+          form.reset();
+        } catch (error) {
+          document.getElementById("response").innerHTML =
+            "❌ Something went wrong";
+        }
+      });
+    </script>
+  </body>
+</html>

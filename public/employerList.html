@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TalentHub | Global Opportunities</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+
+        color: #0f172a;
+
+        background: #f8fafc;
+      }
+
+      header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 20px 8%;
+
+        background: white;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 5;
+
+        box-shadow: 0 5px 20px #ddd;
+      }
+
+      .logo {
+        font-size: 28px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+      }
+
+      nav a {
+        margin: 15px;
+
+        text-decoration: none;
+
+        color: #334155;
+      }
+
+      button {
+        background: #2563eb;
+
+        color: white;
+
+        border: none;
+
+        padding: 14px 28px;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+      }
+
+      section {
+        padding: 70px 8%;
+      }
+
+      h2 {
+        font-size: 38px;
+      }
+
+      .cards {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+        gap: 25px;
+      }
+
+      .card {
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 10px 30px #ddd;
+      }
+
+      .card span {
+        background: #dbeafe;
+
+        padding: 8px;
+
+        border-radius: 20px;
+
+        color: #2563eb;
+      }
+
+      .employer {
+        background: #0f172a;
+
+        color: white;
+
+        text-align: center;
+      }
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+      .opportunity-image {
+        width: 100%;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        border-radius: 15px;
+
+        margin-bottom: 20px;
+      }
+
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+
+      @media (max-width: 800px) {
+        nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">TalentHub</div>
+
+      <nav>
+        <a href="index.html"> Home </a>
+      </nav>
+
+      <!-- <a href="login.html"><button>Login</button></a> -->
+      <button id="loginBtn">Login</button>
+    </header>
+
+    <section id="employer" class="employer">
+      <h2>Are You Hiring?</h2>
+
+      <p>Find skilled talents or create training programs.</p>
+
+      <div id="employerContainer" class="cards">
+        <!-- Opportunities load here -->
+      </div>
+    </section>
+
+    <script>
+      const employerContainer = document.getElementById("employerContainer");
+
+      async function fetchEmployer() {
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/employers/get-requests",
+
+            {
+              credentials: "include",
+            },
+          );
+
+          const data = await response.json();
+
+          displayEmployer(data);
+        } catch (error) {
+          employerContainer.innerHTML = `
+
+<p>
+Unable to load employer.
+</p>
+
+`;
+
+          console.log(error);
+        }
+      }
+
+      function displayEmployer(data) {
+        employerContainer.innerHTML = "";
+
+        if (data.length === 0) {
+          employerContainer.innerHTML = `
+
+<p>
+No employer available
+</p>
+
+`;
+
+          return;
+        }
+
+        data.forEach((item) => {
+          employerContainer.innerHTML += `
+
+
+<div class="card">
+
+<h3>
+
+${item.companyName}
+
+</h3>
+
+
+
+
+<h4>
+
+${item.contactPerson}
+
+</h4>
+
+
+
+
+<p>
+
+${item.email}
+
+...
+
+</p>
+
+
+
+
+<div class="info">
+
+
+<p>
+📌 ${item.country}
+</p>
+
+
+<p>
+${item.requestType}
+</p>
+
+
+
+<p>
+${item.numberOdCandidate}
+</p>
+
+<p>
+${item.message.substring(0, 120)}
+</p>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+`;
+        });
+      }
+
+      fetchEmployer();
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

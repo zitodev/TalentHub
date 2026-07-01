@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="application" class="application">
+      <h2>Are You Hiring?</h2>
+
+      <p>Find skilled talents or create training programs.</p>
+
+      <div id="applicationList" class="cards">
+        <!-- Opportunities load here -->
+      </div>
+    </section>
+    <script>
+      async function fetchApplication() {
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/applications/application-list",
+
+            {
+              credentials: "include",
+            },
+          );
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            const applicationList = document.getElementById("applicationList");
+            applicationList.innerHTML = "";
+            data.forEach((application) => {
+              const listItem = document.createElement("Div");
+              listItem.className = "cards";
+              listItem.innerHTML = `
+<div class="card">
+
+<h3>
+
+${application.fullName}
+
+</h3>
+
+
+<p>
+
+${application.email}
+
+...
+
+</p>
+
+<div class="info">
+
+
+<p>
+📌 ${application.opportunity?.title}
+</p>
+
+
+<p>
+🚮${application.opportunity?.category}
+</p>
+
+
+
+<p>
+🔣${application.opportunity?.opportunityType}
+</p>
+
+
+
+</div>
+
+
+</div>
+`;
+              applicationList.appendChild(listItem);
+            });
+          } else {
+            console.error("failed to  fetch data");
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      }
+      fetchApplication();
+    </script>
+  </body>
+</html>

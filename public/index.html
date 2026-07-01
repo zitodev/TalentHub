@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TalentHub | Global Opportunities</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+
+        color: #0f172a;
+
+        background: #f8fafc;
+      }
+
+      header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 20px 8%;
+
+        background: white;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 5;
+
+        box-shadow: 0 5px 20px #ddd;
+      }
+
+      .logo {
+        font-size: 28px;
+
+        font-weight: bold;
+
+        color: #2563eb;
+      }
+
+      nav a {
+        margin: 15px;
+
+        text-decoration: none;
+
+        color: #334155;
+      }
+
+      button {
+        background: #2563eb;
+
+        color: white;
+
+        border: none;
+
+        padding: 14px 28px;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+      }
+
+      .hero {
+        padding: 80px 8%;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        background: linear-gradient(135deg, #eff6ff, white);
+      }
+
+      .hero h1 {
+        font-size: 55px;
+
+        max-width: 600px;
+      }
+
+      .hero p {
+        font-size: 20px;
+
+        color: #64748b;
+      }
+
+      .secondary {
+        background: white;
+
+        color: #2563eb;
+
+        border: 1px solid #2563eb;
+      }
+
+      .hero-card {
+        background: #2563eb;
+
+        color: white;
+
+        padding: 35px;
+
+        border-radius: 25px;
+      }
+
+      .hero-card div {
+        margin: 20px;
+      }
+
+      section {
+        padding: 70px 8%;
+      }
+
+      h2 {
+        font-size: 38px;
+      }
+
+      .subtitle {
+        color: #64748b;
+      }
+
+      .cards {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+        gap: 25px;
+      }
+
+      .card {
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 10px 30px #ddd;
+      }
+
+      .card span {
+        background: #dbeafe;
+
+        padding: 8px;
+
+        border-radius: 20px;
+
+        color: #2563eb;
+      }
+
+      .features {
+        background: white;
+      }
+
+      .feature-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 20px;
+      }
+
+      .feature-grid div {
+        padding: 25px;
+
+        background: #f8fafc;
+
+        border-radius: 20px;
+      }
+
+      .employer {
+        background: #0f172a;
+
+        color: white;
+
+        text-align: center;
+      }
+
+      .application {
+        text-align: center;
+
+        background: #2563eb;
+
+        color: white;
+      }
+
+      #about {
+        text-align: center;
+      }
+      .opportunity-image {
+        width: 100%;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        border-radius: 15px;
+
+        margin-bottom: 20px;
+      }
+
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+      .opportunity-image {
+        width: 100%;
+
+        height: 180px;
+
+        object-fit: cover;
+
+        border-radius: 15px;
+
+        margin-bottom: 20px;
+      }
+
+      .info {
+        background: #f8fafc;
+
+        padding: 10px;
+
+        border-radius: 10px;
+
+        margin: 15px 0;
+      }
+
+      .info p {
+        font-size: 14px;
+
+        color: #475569;
+      }
+
+      footer {
+        background: #020617;
+
+        color: white;
+
+        padding: 30px;
+
+        text-align: center;
+      }
+
+      @media (max-width: 800px) {
+        .hero {
+          flex-direction: column;
+        }
+
+        .hero h1 {
+          font-size: 35px;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">TalentHub</div>
+
+      <nav>
+        <a href="#home"> Home </a>
+
+        <a href="#opportunities"> Opportunities </a>
+
+        <a href="employer.html">Submit Employer request </a>
+
+        <a href="#about"> About </a>
+      </nav>
+
+      <!-- <a href="login.html"><button>Login</button></a> -->
+      <button id="loginBtn">Login</button>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>Discover Opportunities. Build Your Future.</h1>
+
+        <p>
+          Find jobs, internships, training programs, and workshops designed to
+          grow your career.
+        </p>
+
+        <div>
+          <button class="primary">Explore Opportunities</button>
+
+          <button class="secondary">Join Talent Network</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div>
+          <h3>500+</h3>
+
+          <p>Opportunities</p>
+        </div>
+
+        <div>
+          <h3>100+</h3>
+
+          <p>Companies</p>
+        </div>
+
+        <div>
+          <h3>10K+</h3>
+
+          <p>Students</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="opportunities">
+      <h2>Latest Opportunities</h2>
+
+      <p class="subtitle">
+        Explore career opportunities from trusted organizations.
+      </p>
+
+      <div id="opportunityContainer" class="cards">
+        <!-- Opportunities load here -->
+      </div>
+    </section>
+
+    <section class="features">
+      <div>
+        <h2>Why Choose TalentHub?</h2>
+
+        <p>We connect talented individuals with global companies.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div>
+          <h3>🚀 Career Growth</h3>
+
+          <p>Access opportunities that improve your skills.</p>
+        </div>
+
+        <div>
+          <h3>🌍 Global Network</h3>
+
+          <p>Connect with employers worldwide.</p>
+        </div>
+
+        <div>
+          <h3>🎓 Professional Training</h3>
+
+          <p>Learn from industry experts.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="employer" class="employer">
+      <h2>Are You Hiring?</h2>
+
+      <p>Find skilled talents or create training programs.</p>
+
+      <div id="employerContainer" class="cards">
+        <!-- Opportunities load here -->
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About TalentHub</h2>
+
+      <p>
+        A modern opportunity platform connecting students, professionals, and
+        organizations through jobs, internships and learning programs.
+      </p>
+    </section>
+
+    <footer>
+      <h3>TalentHub</h3>
+
+      <p>© 2026 TalentHub. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const API_URL =
+        "http://localhost:5000/api/opportunities/get-all-opportunities";
+
+      const container = document.getElementById("opportunityContainer");
+
+      async function fetchOpportunities() {
+        try {
+          const response = await fetch(API_URL);
+
+          const opportunities = await response.json();
+
+          displayOpportunities(opportunities.data || opportunities);
+        } catch (error) {
+          container.innerHTML = `
+
+<p>
+Unable to load opportunities.
+</p>
+
+`;
+
+          console.log(error);
+        }
+      }
+
+      function displayOpportunities(data) {
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+          container.innerHTML = `
+
+<p>
+No opportunities available
+</p>
+
+`;
+
+          return;
+        }
+
+        data.forEach((item) => {
+          container.innerHTML += `
+
+
+<div class="card">
+
+
+
+${
+  item.image
+    ? `
+<img 
+src="http://localhost:5000${item.image}"
+class="opportunity-image">
+`
+    : ""
+}
+
+
+
+
+<h3>
+
+${item.title}
+
+</h3>
+
+
+
+
+<span>
+
+${item.category}
+
+</span>
+
+
+
+
+<p>
+
+${item.description.substring(0, 120)}
+
+...
+
+</p>
+
+
+
+
+<div class="info">
+
+
+<p>
+📌 ${item.location}
+</p>
+
+
+<p>
+⏳ ${item.duration}
+</p>
+
+
+<p>
+📅 ${new Date(item.startDate).toDateString()}
+</p>
+
+<p>
+🖥️ ${item.responsibilities}
+</p>
+
+<p>
+📚 ${item.requirements}
+</p>
+
+<p>
+🎖️ ${item.benefits}
+</p>
+
+
+<p>
+💼 ${item.opportunityType}
+</p>
+
+
+</div>
+
+
+
+
+<button
+onclick="apply('${item._id}')">
+
+Apply Now
+
+</button>
+
+
+
+</div>
+
+
+
+`;
+        });
+      }
+
+      function apply(id) {
+        window.location.href = `application.html?id=${id}`;
+      }
+
+      fetchOpportunities();
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
