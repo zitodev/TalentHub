@@ -251,7 +251,7 @@ class="opportunity-image">
 
 
 <h3>
-
+Title:
 ${item.title}
 
 </h3>
@@ -260,7 +260,7 @@ ${item.title}
 
 
 <span>
-
+Category:
 ${item.category}
 
 </span>
@@ -269,7 +269,7 @@ ${item.category}
 
 
 <p>
-
+Desceiption:
 ${item.description.substring(0, 120)}
 
 ...
@@ -283,33 +283,40 @@ ${item.description.substring(0, 120)}
 
 
 <p>
+  Location:
 📌 ${item.location}
 </p>
 
 
 <p>
+  Duration:
 ⏳ ${item.duration}
 </p>
 
 
 <p>
+  Start Date:
 📅 ${new Date(item.startDate).toDateString()}
 </p>
 
 <p>
+  Responsibilities:
 🖥️ ${item.responsibilities}
 </p>
 
 <p>
+  Requirements:
 📚 ${item.requirements}
 </p>
 
 <p>
+  Benefits:
 🎖️ ${item.benefits}
 </p>
 
 
 <p>
+  Opportunity Type:
 💼 ${item.opportunityType}
 </p>
 

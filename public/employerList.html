@@ -189,8 +189,6 @@
         <!-- Opportunities load here -->
       </div>
     </section>
-    <script src="config.js"></script>
-
     <script>
       const employerContainer = document.getElementById("employerContainer");
 
@@ -242,13 +240,13 @@ No employer available
 <div class="info">
 
 <p >
-
+Company Name:
 ${item.companyName}
 
 </p>
 
 <p>
-
+Contact Info:
 ${item.contactPerson}
 
 </p>
@@ -257,7 +255,7 @@ ${item.contactPerson}
 
 
 <p>
-
+Company Email: 
 ${item.email}
 
 ...
@@ -267,21 +265,25 @@ ${item.email}
 
 
 <p>
+  Location:
 📌 ${item.country}
 </p>
 
 
 <p>
+  Request Type:
 ${item.requestType}
 </p>
 
 
 
 <p>
+  Number of Candidates Needed:
 ${item.numberOfCandidates}
 </p>
 
 <p>
+  Report"
 ${item.message.substring(0, 120)}
 </p>
 
