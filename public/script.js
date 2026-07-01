@@ -12,10 +12,6 @@ async function checkUser() {
 
     if (response.ok) {
       loginBtn.innerHTML = "Logout";
-      const admin = (loginBtn.innerHTML = "Admin");
-      admin.onclick = () => {
-        window.location.href = "adminDashboard.html";
-      };
 
       loginBtn.onclick = logout;
     } else {
