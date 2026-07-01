@@ -1,4 +1,4 @@
-const EmployerRequest = require("../models/EmployerRequest");
+const EmployerRequest = require("../models/employerRequest");
 
 exports.submitRequest = async (req, res) => {
   const request = await EmployerRequest.create(req.body);

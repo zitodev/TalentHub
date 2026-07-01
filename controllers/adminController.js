@@ -1,6 +1,6 @@
-const Opportunity = require("../models/Opportunity");
-const Application = require("../models/Application");
-const Employer = require("../models/EmployerRequest");
+const Opportunity = require("../models/opportunity");
+const Application = require("../models/application");
+const Employer = require("../models/employerRequest");
 
 exports.dashboard = async (req, res) => {
   const opportunities = await Opportunity.countDocuments();

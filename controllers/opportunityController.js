@@ -1,31 +1,4 @@
-const Opportunity = require("../models/Opportunity");
-
-// GET ALL
-
-// exports.getOpportunities = async (req, res) => {
-//   const { keyword, category, location } = req.query;
-
-//   let filter = {};
-
-//   if (keyword) {
-//     filter.title = {
-//       $regex: keyword,
-//       $options: "i",
-//     };
-//   }
-
-//   if (category) {
-//     filter.category = category;
-//   }
-
-//   if (location) {
-//     filter.location = location;
-//   }
-
-//   const data = await Opportunity.find(filter);
-
-//   res.json(data);
-// };
+const Opportunity = require("../models/opportunity");
 
 exports.getOpportunities = async (req, res) => {
   const page = Number(req.query.page) || 1;

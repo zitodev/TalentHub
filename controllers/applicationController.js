@@ -1,4 +1,4 @@
-const Application = require("../models/Application");
+const Application = require("../models/application");
 const transporter = require("../utils/email");
 
 exports.submitApplication = async (req, res) => {
