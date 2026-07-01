@@ -199,7 +199,7 @@
 
           <div class="input-box">
             <select id="category">
-              <option>Select Category</option>
+              <option value="">Select Category</option>
 
               <option>Job</option>
 
@@ -215,7 +215,7 @@
 
           <div class="input-box">
             <select id="opportunityType">
-              <option>Opportunity Type</option>
+              <option value="">Opportunity Type</option>
 
               <option>Full-time</option>
 
@@ -263,31 +263,18 @@
         <div class="array-section">
           <h3>Responsibilities</h3>
 
-          <div id="responsibilities"></div>
-
-          <button type="button" onclick="addField('responsibilities')">
-            + Add Responsibility
-          </button>
+          <input type="text" placeholder="Responsibilities" />
         </div>
 
         <div class="array-section">
           <h3>Requirements</h3>
-
-          <div id="requirements"></div>
-
-          <button type="button" onclick="addField('requirements')">
-            + Add Requirement
-          </button>
+          <input type="text" placeholder="Requirements" />
         </div>
 
         <div class="array-section">
           <h3>Benefits</h3>
 
-          <div id="benefits"></div>
-
-          <button type="button" onclick="addField('benefits')">
-            + Add Benefit
-          </button>
+          <input type="text" placeholder="benefits" />
         </div>
 
         <button class="submit">Create Opportunity</button>
@@ -309,82 +296,59 @@
         }
       };
 
-      function addField(id) {
-        const div = document.getElementById(id);
+      const form = document.getElementById("opportunityForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-        const input = document.createElement("input");
+        const data = {
+          title: title.value,
 
-        input.type = "text";
+          category: category.value,
 
-        input.placeholder = "Enter item";
+          opportunityType: opportunityType.value,
 
-        div.appendChild(input);
-      }
+          description: description.value,
 
-      addField("responsibilities");
+          location: location.value,
 
-      addField("requirements");
+          duration: duration.value,
 
-      addField("benefits");
+          responsibilities: responsibilities.value,
 
-      document
-        .getElementById("opportunityForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
+          requirements: requirements.value,
 
-          const getArray = (id) => {
-            return [
-              ...document.getElementById(id).querySelectorAll("input"),
-            ].map((x) => x.value);
-          };
+          benefits: benefits.value,
 
-          const data = {
-            title: title.value,
+          startDate: startDate.value,
+        };
 
-            category: category.value,
+        const response = await fetch(
+          "https://talenthub-v85u.onrender.com/api/opportunities/create-opportunity",
 
-            opportunityType: opportunityType.value,
+          {
+            method: "POST",
 
-            description: description.value,
-
-            location: location.value,
-
-            duration: duration.value,
-
-            responsibilities: getArray("responsibilities"),
-
-            requirements: getArray("requirements"),
-
-            benefits: getArray("benefits"),
-
-            startDate: startDate.value,
-          };
-
-          const response = await fetch(
-            "https://talenthub-v85u.onrender.com/api/opportunities/create-opportunity",
-
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type": "application/json",
-              },
-
-              credentials: "include",
-
-              body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
 
-          const result = await response.json();
+            credentials: "include",
 
-          if (response.ok) {
-            document.getElementById("message").innerHTML =
-              "✅ Opportunity Created Successfully";
-          } else {
-            document.getElementById("message").innerHTML = result.message;
-          }
-        });
+            body: JSON.stringify(data),
+          },
+        );
+
+        const result = await response.json();
+        console.log(result);
+
+        if (response.ok) {
+          console.log(response);
+          document.getElementById("message").innerHTML =
+            "✅ Opportunity Created Successfully";
+        } else {
+          document.getElementById("message").innerHTML = result.message;
+        }
+      });
     </script>
   </body>
 </html>
