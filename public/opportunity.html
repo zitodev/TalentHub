@@ -381,6 +381,7 @@
           if (response.ok) {
             document.getElementById("message").innerHTML =
               "✅ Opportunity Created Successfully";
+            window.location.href = "adminDashboard.html";
           } else {
             document.getElementById("message").innerHTML = result.message;
           }
