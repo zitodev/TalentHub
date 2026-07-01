@@ -189,6 +189,7 @@
         <!-- Opportunities load here -->
       </div>
     </section>
+    <script src="config.js"></script>
 
     <script>
       const employerContainer = document.getElementById("employerContainer");
@@ -196,7 +197,7 @@
       async function fetchEmployer() {
         try {
           const response = await fetch(
-            "http://localhost:5000/api/employers/get-requests",
+            `{API}/employers/get-requests`,
 
             {
               credentials: "include",
