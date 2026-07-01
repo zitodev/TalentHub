@@ -3,7 +3,7 @@ const Opportunity = require("../models/opportunity");
 exports.getOpportunities = async (req, res) => {
   const page = Number(req.query.page) || 1;
 
-  const limit = 6;
+  const limit = 15;
 
   const skip = (page - 1) * limit;
 
